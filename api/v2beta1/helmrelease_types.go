@@ -249,6 +249,12 @@ type HelmChartTemplateSpec struct {
 	// Alternative values file to use as the default chart values, expected to be a
 	// relative path in the SourceRef. Ignored when omitted.
 	// +optional
+	ValuesFiles []string `json:"valuesFiles,omitempty"`
+
+	// Alternative values file to use as the default chart values, expected to be a
+	// relative path in the SourceRef. Ignored when omitted.
+	// +optional
+	// +deprecated
 	ValuesFile string `json:"valuesFile,omitempty"`
 }
 

@@ -96,6 +96,13 @@ spec:
                           chart values, expected to be a relative path in the SourceRef.
                           Ignored when omitted.
                         type: string
+                      valuesFiles:
+                        description: Alternative values file to use as the default
+                          chart values, expected to be a relative path in the SourceRef.
+                          Ignored when omitted.
+                        items:
+                          type: string
+                        type: array
                       version:
                         default: '*'
                         description: Version semver expression, ignored for charts
