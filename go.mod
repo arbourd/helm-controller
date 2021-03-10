@@ -4,7 +4,7 @@ go 1.15
 
 replace (
 	github.com/fluxcd/helm-controller/api => ./api
-	github.com/fluxcd/source-controller/api v0.9.0-1 => github.com/arbourd/source-controller/api v0.9.0-1
+	github.com/fluxcd/source-controller/api v0.9.0-2 => github.com/arbourd/source-controller/api v0.9.0-2
 )
 
 require (
@@ -12,7 +12,7 @@ require (
 	github.com/fluxcd/pkg/apis/kustomize v0.0.1
 	github.com/fluxcd/pkg/apis/meta v0.8.0
 	github.com/fluxcd/pkg/runtime v0.8.3
-	github.com/fluxcd/source-controller/api v0.9.0-1
+	github.com/fluxcd/source-controller/api v0.9.0-2
 	github.com/go-logr/logr v0.3.0
 	github.com/hashicorp/go-retryablehttp v0.6.8
 	github.com/onsi/ginkgo v1.14.1

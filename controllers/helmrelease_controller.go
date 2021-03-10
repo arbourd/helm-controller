@@ -256,7 +256,7 @@ func (r *HelmReleaseReconciler) reconcile(ctx context.Context, hr v2.HelmRelease
 	}
 
 	// Reconcile Helm release
-	reconciledHr, reconcileErr := r.reconcileRelease(ctx, *hr.DeepCopy(), chart, values)
+	reconciledHr, reconcileErr := r.reconcileRelease(ctx, *hr.DeepCopy(), *hc.DeepCopy(), chart, values)
 	if reconcileErr != nil {
 		r.event(ctx, hr, hc.GetArtifact().Revision, events.EventSeverityError,
 			fmt.Sprintf("reconciliation failed: %s", reconcileErr.Error()))
@@ -271,7 +271,7 @@ type HelmReleaseReconcilerOptions struct {
 }
 
 func (r *HelmReleaseReconciler) reconcileRelease(ctx context.Context,
-	hr v2.HelmRelease, chart *chart.Chart, values chartutil.Values) (v2.HelmRelease, error) {
+	hr v2.HelmRelease, hc sourcev1.HelmChart, chart *chart.Chart, values chartutil.Values) (v2.HelmRelease, error) {
 	log := logr.FromContext(ctx)
 
 	// Initialize Helm action runner
@@ -293,6 +293,9 @@ func (r *HelmReleaseReconciler) reconcileRelease(ctx context.Context,
 
 	// Register the current release attempt.
 	revision := chart.Metadata.Version
+	if hc.Spec.IgnoreVersion && hc.Kind != "HelmRepository" {
+		revision = hc.GetArtifact().Revision
+	}
 	releaseRevision := util.ReleaseRevision(rel)
 	valuesChecksum := util.ValuesChecksum(values)
 	hr, hasNewState := v2.HelmReleaseAttempted(hr, revision, releaseRevision, valuesChecksum)

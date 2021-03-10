@@ -175,8 +175,8 @@ func buildHelmChartFromTemplate(hr *v2.HelmRelease) *sourcev1.HelmChart {
 				Kind: template.Spec.SourceRef.Kind,
 			},
 			Interval:    template.GetInterval(hr.Spec.Interval),
-			ValuesFile:  template.Spec.ValuesFile,
 			ValuesFiles: template.Spec.ValuesFiles,
+			ValuesFile:  template.Spec.ValuesFile,
 		},
 	}
 }
